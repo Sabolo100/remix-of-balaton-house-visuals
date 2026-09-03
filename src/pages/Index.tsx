@@ -1,38 +1,61 @@
-import ImageGallery from "@/components/ImageGallery";
+import { ArrowUpRight } from "lucide-react";
+import { Wordmark } from "@/components/BrandMark";
+import { DrawingGallery } from "@/components/gallery/DrawingGallery";
+import { PROJECT } from "@/data/drawings";
 
-const Index = () => {
-  return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border">
-        <div className="max-w-5xl mx-auto px-4 py-6 sm:py-8 text-center">
-          <h1 className="font-display text-2xl sm:text-3xl md:text-4xl text-primary tracking-wide">
-            Lelle Wave Residence
-          </h1>
-          <p className="text-muted-foreground font-body text-sm sm:text-base mt-2 tracking-widest uppercase">
-            Műszaki dokumentáció
-          </p>
-        </div>
-      </header>
-
-      {/* Gallery */}
-      <main className="py-6 sm:py-10">
-        <ImageGallery />
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-border py-6 text-center">
+const Index = () => (
+  <div className="flex min-h-screen flex-col bg-background">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
+      <div className="mx-auto flex max-w-[1240px] items-center justify-between gap-4 px-4 py-3.5 sm:px-8 sm:py-4">
+        <Wordmark />
         <a
-          href="https://lellewave.hu"
+          href={PROJECT.siteUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-primary hover:text-primary/80 text-sm font-body transition-colors"
+          className="label-caps flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-primary"
+        >
+          <span className="hidden sm:inline">lellewave.hu</span>
+          <span className="sm:hidden">Projekt</span>
+          <ArrowUpRight className="h-3.5 w-3.5" />
+        </a>
+      </div>
+    </header>
+
+    <main className="mx-auto w-full max-w-[1240px] flex-1 px-4 pb-16 pt-8 sm:px-8 sm:pt-12">
+      <div className="mb-8 animate-rise-in sm:mb-12">
+        <p className="label-caps text-primary">{PROJECT.name}</p>
+        <h1 className="mt-2.5 font-display text-[1.75rem] leading-tight text-foreground sm:text-[2.5rem]">
+          Műszaki dokumentáció
+        </h1>
+        <div className="rule-gold mt-5 h-px w-16" />
+        <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
+          {PROJECT.documentTitle} — szintenkénti alaprajzok, metszetek és homlokzatok.
+          <span className="mt-1 block text-[0.8rem] text-muted-foreground/80">
+            {PROJECT.address} · {PROJECT.date}
+          </span>
+        </p>
+      </div>
+
+      <DrawingGallery />
+    </main>
+
+    <footer className="border-t border-border bg-card">
+      <div className="mx-auto flex max-w-[1240px] flex-col items-start gap-3 px-4 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+        <p className="text-xs leading-relaxed text-muted-foreground">
+          A tervlapok tájékoztató jellegűek, a kivitelezés során eltérés lehetséges.
+        </p>
+        <a
+          href={PROJECT.siteUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="label-caps flex items-center gap-1.5 text-primary transition-opacity hover:opacity-70"
         >
           lellewave.hu
+          <ArrowUpRight className="h-3.5 w-3.5" />
         </a>
-      </footer>
-    </div>
-  );
-};
+      </div>
+    </footer>
+  </div>
+);
 
 export default Index;
