@@ -4,8 +4,10 @@ import NotFound from "./pages/NotFound.tsx";
 
 // One page, no data layer: the query client, tooltip and toast providers that
 // ship with the starter would only add bytes to a link people open on a phone.
+// GitHub Pages serves the app from /<repo>/, so the router is given that root
+// via BASE_URL — without it every URL falls through to NotFound.
 const App = () => (
-  <BrowserRouter>
+  <BrowserRouter basename={import.meta.env.BASE_URL}>
     <Routes>
       <Route path="/" element={<Index />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

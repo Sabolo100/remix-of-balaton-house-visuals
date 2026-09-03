@@ -13,7 +13,7 @@ const NotFound = () => (
       </p>
     </div>
     <a
-      href="/"
+      href={import.meta.env.BASE_URL}
       className="label-caps border border-primary bg-primary px-5 py-2.5 text-primary-foreground transition-colors hover:bg-primary/85"
     >
       Vissza a dokumentációhoz
