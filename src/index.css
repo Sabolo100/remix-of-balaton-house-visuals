@@ -1,49 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Palette lifted from lellewave.hu: brass #A48F62 on warm off-white,
+ * Playfair Display headings over Inter body copy, near-square corners.
+ */
 @layer base {
   :root {
-    --background: 30 5% 12%;
-    --foreground: 40 20% 90%;
+    --background: 40 23% 97%;
+    --foreground: 0 0% 20%;
 
-    --card: 30 5% 16%;
-    --card-foreground: 40 20% 90%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 20%;
 
-    --popover: 30 5% 14%;
-    --popover-foreground: 40 20% 90%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 20%;
 
-    --primary: 40 45% 58%;
-    --primary-foreground: 30 5% 10%;
+    /* #A48F62 — the brand brass */
+    --primary: 41 27% 51%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 5% 20%;
-    --secondary-foreground: 40 20% 85%;
+    --secondary: 34 25% 93%;
+    --secondary-foreground: 0 0% 20%;
 
-    --muted: 30 5% 18%;
-    --muted-foreground: 40 10% 55%;
+    --muted: 34 25% 93%;
+    --muted-foreground: 35 6% 42%;
 
-    --accent: 40 45% 58%;
-    --accent-foreground: 30 5% 10%;
+    --accent: 34 25% 89%;
+    --accent-foreground: 0 0% 20%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 60% 48%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 30 8% 25%;
-    --input: 30 8% 25%;
-    --ring: 40 45% 58%;
+    --border: 37 20% 87%;
+    --input: 37 20% 87%;
+    --ring: 41 27% 51%;
 
-    --radius: 0.375rem;
+    --radius: 2px;
 
-    --sidebar-background: 30 5% 10%;
-    --sidebar-foreground: 40 20% 90%;
-    --sidebar-primary: 40 45% 58%;
-    --sidebar-primary-foreground: 30 5% 10%;
-    --sidebar-accent: 30 5% 18%;
-    --sidebar-accent-foreground: 40 20% 90%;
-    --sidebar-border: 30 8% 25%;
-    --sidebar-ring: 40 45% 58%;
+    /* Body copy sits a touch lighter than headings, as on the parent site. */
+    --body-text: 0 0% 33%;
+    /* Drawings are black line work on white — they need a white bed. */
+    --stage: 0 0% 100%;
+    /* Full-screen viewer: near-black, so nothing competes with the sheet. */
+    --overlay: 0 0% 8%;
   }
 }
 
@@ -52,7 +53,58 @@
     @apply border-border;
   }
 
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
-    @apply bg-background text-foreground font-body;
+    @apply bg-background font-body antialiased;
+    color: hsl(var(--body-text));
+  }
+
+  /* Never let a stray wide element scroll the whole page sideways. */
+  body {
+    overflow-x: hidden;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer components {
+  /* Letterspaced small caps used for labels, as on lellewave.hu. */
+  .label-caps {
+    @apply font-body text-[0.68rem] font-medium uppercase tracking-[0.18em];
+  }
+
+  .rule-gold {
+    background: linear-gradient(
+      to right,
+      transparent,
+      hsl(var(--primary) / 0.55) 20%,
+      hsl(var(--primary) / 0.55) 80%,
+      transparent
+    );
+  }
+
+  /* Horizontal rails: hide the scrollbar but keep the scrolling. */
+  .rail {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
